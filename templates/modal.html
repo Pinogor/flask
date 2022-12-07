@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">Отличная работа!</h4>
+    <p>Созданы ТКС:
+    <p>100 - {{ ac }}..<br/>
+        11100 - {{ ac }}<br/>
+        44100 - {{ ac }} (тестовые стреды)<br/>
+    <p/>
+    <p class="mb-0">Способ подключения к ТКС 8-800-555-5550 100# или 11100# </p>
+    <hr>
+    {% for i in moderators %}
+    Модератор {{i}} добавлен!!<br/>
+    {% endfor %}
+</div>
+<div class="d-grid gap-2 col-12 mx-auto"><a id="btn" type="submit" class="btn btn-secondary mt-1" href="/"> На главную </a>
+    {% endblock %}</div>

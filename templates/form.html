@@ -1,24 +1,23 @@
-<div class="container mt-5">
-    <div class="row justify-content-md-center">
-        <div class="col-6">
-            <form action="/create_tks/" method="post">
-                <div class="mb-3">
-                    <label for="InputAC" class="form-label">Название АС: </label>
-                    <input type="text" class="form-control" id="InputAC" name="AC"
-                           placeholder="Example AC">
-                    <div id="ACHelp" class="form-text">Введите название АС.</div>
-                </div>
-                <div class="mb-3" id="add_moder">
-                    <label  for="emailModer" class="form-label">Модераторы:</label>
-                    <input type="email" class="form-control" id="emailModer" name="moder" aria-describedby="emailHelp"
-                           placeholder="name@example.com" >
-                    <div id="emailHelp" class="form-text">Введите email внутреней почты</div>
-                </div>
-                <button id="btn" type="submit" class="btn btn-primary"> Создать ТКС
-                </button>
-                <a id="addModer" type="submit" class="btn btn-dark"> Добавить модератора
-                </a>
-            </form>
-        </div>
+{% extends  'index.html' %}
+{% block content %}
+
+<form action="/create_tks/" method="POST">
+    <div class="mb-3">
+        <label for="InputAC" class="form-label">Название АС: </label>
+        <input type="text" class="form-control" id="InputAC" name="AC"
+               placeholder="Example AC" value="Example AC">
+        <div id="ACHelp" class="form-text">Введите название АС.</div>
     </div>
-</div>
+    <div class="mb-3" id="add_moder">
+        <label for="emailModer" class="form-label">Модераторы:</label>
+        <input type="email" class="form-control" id="emailModer" name="moder" aria-describedby="emailHelp"
+               placeholder="name@example.com" value="name@example.com">
+        <div id="emailHelp" class="form-text">Введите email внутреней почты</div>
+    </div>
+    <button id="btn" type="submit" class="btn btn-primary mt-1"> Создать ТКС
+    </button>
+    <a id="addModer" type="submit" class="btn btn-secondary mt-1"> Добавить модератора
+    </a>
+</form>
+
+{% endblock %}

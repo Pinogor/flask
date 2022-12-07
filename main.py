@@ -6,24 +6,17 @@ app = Flask(__name__, static_folder="static")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("form.html")
 
 
 @app.route("/create_tks/", methods=['GET', 'POST'])
 def create_tks():
     if request.method == 'POST':
-        name_ac = request.form.get('AC')
-        email = request.form.get('moder')
-        if name_ac == '' or email == '':
-            return redirect('/')
-        else:
-            run_time()
-            context = {'name_ac': name_ac,
-                       'email': email}
-        print(context)
-        return redirect("/")
+        run_time()
+        data = [v for v in request.form.values()]
+        return render_template('modal.html',  ac=data[0], moderators=data[1:])
     else:
-        return 'Error'
+        return redirect("/")
 
 
 def run_time():
