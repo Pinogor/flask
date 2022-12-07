@@ -8,14 +8,16 @@
                            placeholder="Example AC">
                     <div id="ACHelp" class="form-text">Введите название АС.</div>
                 </div>
-                <div class="mb-3">
-                    <label for="InputEmail" class="form-label">Модераторы:</label>
-                    <input type="email" class="form-control" id="InputEmail" name="moder" aria-describedby="emailHelp"
-                           placeholder="name@example.com">
+                <div class="mb-3" id="add_moder">
+                    <label  for="emailModer" class="form-label">Модераторы:</label>
+                    <input type="email" class="form-control" id="emailModer" name="moder" aria-describedby="emailHelp"
+                           placeholder="name@example.com" >
                     <div id="emailHelp" class="form-text">Введите email внутреней почты</div>
                 </div>
                 <button id="btn" type="submit" class="btn btn-primary"> Создать ТКС
                 </button>
+                <a id="addModer" type="submit" class="btn btn-dark"> Добавить модератора
+                </a>
             </form>
         </div>
     </div>
