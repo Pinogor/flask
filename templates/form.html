@@ -1,0 +1,22 @@
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-6">
+            <form action="/create_tks/" method="post">
+                <div class="mb-3">
+                    <label for="InputAC" class="form-label">Название АС: </label>
+                    <input type="text" class="form-control" id="InputAC" name="AC"
+                           placeholder="Example AC">
+                    <div id="ACHelp" class="form-text">Введите название АС.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="InputEmail" class="form-label">Модераторы:</label>
+                    <input type="email" class="form-control" id="InputEmail" name="moder" aria-describedby="emailHelp"
+                           placeholder="name@example.com">
+                    <div id="emailHelp" class="form-text">Введите email внутреней почты</div>
+                </div>
+                <button id="btn" type="submit" class="btn btn-primary"> Создать ТКС
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
