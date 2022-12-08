@@ -42,7 +42,7 @@
     $("#btn").on('click', function () {
         console.log($('.email').html())
         var email = $("#emailModer").val();
-        if (email.includes('@omega.sbrf.ru') || email.includes('@..ru') || email.includes('@..ru')){
+        if (email.includes('@..ru') || email.includes('@..ru') || email.includes('@..ru')){
             $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Создается ТКС ')
         } else {
             alert('Проверьте корректность заполнение полей!!!')
