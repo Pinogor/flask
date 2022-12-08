@@ -40,24 +40,25 @@
 </html>
 <script>
     $("#btn").on('click', function () {
+        console.log($('.email').html())
         var email = $("#emailModer").val();
-        var ac = $("#InputAC").val()
-        var pattern = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (ac !== '' && pattern.test(email)){
+        if (email.includes('@omega.sbrf.ru') || email.includes('@..ru') || email.includes('@..ru')){
             $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Создается ТКС ')
         } else {
             alert('Проверьте корректность заполнение полей!!!')
         }
     })
+
     function makeCounter() {
-        var currentCount = 0;
+        var currentCount = 1;
         return function () {
             return currentCount++;
         }}
     var counter = makeCounter();
     $("#addModer").on('click', function () {
+       var count = counter()
             $("#add_moder").append(
-                '<input type="email" class="form-control" id="" name="moder'+counter()+'" aria-describedby="emailHelp" placeholder="name@example.com" value="'+counter()+'@example.com"> <div id="emailHelp" class="form-text">Введите email внутреней почты</div>'
+                '<input type="email" class="form-control" id="" name="moder'+count+'" aria-describedby="emailHelp" placeholder="name@example.com" value="'+count+'@example.com" required> <div id="emailHelp" class="form-text">Введите email внутреней почты</div>'
             )
         })
 

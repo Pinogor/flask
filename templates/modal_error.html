@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% block content %}
+    <div class="alert alert-dismissible" role="alert">
+        <h4 class="alert-heading">Ошибка заполнения формы !!!!!</h4>
+        {% for email in content %}
+            Проверьте Email: {{ email }} <br/>
+        {% endfor %}
+    </div>
+    <div class="d-grid gap-2 col-12 mx-auto">
+        <a id="btn_back" type="submit" class="btn btn-secondary mt-1" href="/"> На главную </a>
+    </div>
+    <script>
+    </script>
+{% endblock %}
+
