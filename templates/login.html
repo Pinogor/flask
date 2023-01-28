@@ -1,0 +1,26 @@
+{% extends  'index.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-4">
+            <form action="/login" method="POST">
+                <p class="alert-danger">{{context}}</p>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Адрес эл. почты или логин </label>
+                    <input name="login" type="text" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">Введите логин</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Пароль</label>
+                    <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+                    <small id="passwordHelp" class="form-text text-muted">введите пароль</small>
+                </div>
+                <div class="row row-cols-3 justify-content-md-end">
+            <button type="submit" class="btn btn-primary btn-xs pull-right">Войти</button>
+        </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
