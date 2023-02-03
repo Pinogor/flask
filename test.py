@@ -1,3 +1,6 @@
+import random
+
+
 def application(env, start_response):
     start_response('200 OK', [('Content-Type', 'text/html')])
     return [b"Hello World"]
@@ -27,6 +30,19 @@ class new_():
         self.count += 1
         return self.value
 
+ip = {
+        '10.119.243.3': True,
+        '10.119.243.234': True,
+        '10.119.243.54': True,
+        '10.119.243.545': True,
+        '10.119.243.123': True,
+        '10.119.243.122': True,
+        '10.119.243.121': True,
+        '10.119.243.124': True,
+        '10.119.243.125': True,
+    }
 
-
-
+d = {
+    'False': False,
+    'True': True
+}

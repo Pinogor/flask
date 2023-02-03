@@ -1,18 +1,19 @@
 from flask import Flask, request, render_template, redirect, abort, jsonify, url_for
 from flask.views import View
 import os
+import json
 from flask_login import UserMixin, LoginManager, login_user, logout_user, login_required
 from flask_sqlalchemy import SQLAlchemy
 import time
 import re
-from json_test import data
+from json_test import ip
 import random
 from flask_restful import Resource, Api
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__, static_folder="static")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = os.urandom(12).hex()
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SECRET_KEY"] = os.urandom(12).hex()
 api = Api(app)
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -31,62 +32,62 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):
-        return f'{self.id}:{self.username}'
+        return f"{self.id}:{self.username}"
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        user = User.query.filter_by(username=request.form.get('login')).first()
+        user = User.query.filter_by(username=request.form.get("login")).first()
         if user:
-            if bcrypt.check_password_hash(user.password, request.form.get('password')):
+            if bcrypt.check_password_hash(user.password, request.form.get("password")):
                 login_user(user)
-                return redirect('/create_tks')
+                return redirect("/create_tks")
         else:
-            return render_template('login.html', context='Невкрный логин или пароль!')
-    return render_template('login.html')
+            return render_template("login.html", context="Невкрный логин или пароль!")
+    return render_template("login.html")
 
 
-@app.route('/logout', methods=['GET', 'POST'])
+@app.route("/logout", methods=["GET", "POST"])
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for("login"))
 
 
-@app.route("/create_tks", methods=['GET', 'POST'])
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/create_tks", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 @login_required
 def create_tks():
-    if request.method == 'POST':
+    if request.method == "POST":
         data = [value for value in request.form.values()]
         for value in data[1:]:
-            if re.search(r'@[a-z]{5}.[a-z]{4}.ru$', value):
+            if re.search(r"@[a-z]{5}.[a-z]{4}.ru$", value):
                 continue
-            return render_template('modal_error.html', content=data)
+            return render_template("modal_error.html", content=data)
         time.sleep(3)
-        return render_template('modal.html', ac=data[0], moderators=data[1:])
+        return render_template("modal.html", ac=data[0], moderators=data[1:])
     if login_required:
         return render_template("form.html")
 
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():
-    return redirect('/login?next=' + request.path)
+    return redirect("/login?next=" + request.path)
 
 
-@app.route("/create_tks_api/", methods=['POST'])
+@app.route("/create_tks_api/", methods=["POST"])
 def create_tks_api():
     if not request.data:
         abort(400)
     create_tks = {
-        'ac': request.json['ac'],
-        'moderators': request.json['moderators'],
+        "ac": request.json["ac"],
+        "moderators": request.json["moderators"],
     }
     print(request.data)
     print(request.json)
     print(request.values)
     print(request.args)
-    return jsonify({'create_tks': create_tks}), 201
+    return jsonify({"create_tks": create_tks}), 201
 
 
 class TKS(Resource):
@@ -94,16 +95,41 @@ class TKS(Resource):
 
     def get(self, id):
         if id == 0:
-            return random.choice(data), 200
-        for value in data:
-            if value['id'] == id:
+            return random.choice(ip), 200
+        for value in ip:
+            if value["id"] == id:
                 return value, 200
         return "Данных не найдено ", 404
 
 
-api.add_resource(TKS, '/create_tks_api/<int:id>')
+ip_ = {
+    "10.119.243.3": True,
+    "10.119.243.234": True,
+    "10.119.243.54": True,
+    "10.119.243.545": True,
+    "10.119.243.123": True,
+    "10.119.243.121": True,
+    "10.119.243.122": True,
+    "10.119.243.126": True,
+    "10.119.243.124": True,
+    "10.119.243.125": True,
+}
 
-if __name__ == '__main__':
+
+@app.route("/cutter", methods=["GET"])
+def cutter():
+    return render_template("cutter.html", ip=ip_)
+
+
+@app.route("/cutter_update", methods=["GET"])
+def cutter_update():
+    ip_[request.args.get("ipaddress")] = request.args.get("value")
+    return redirect('cutter')
+
+
+api.add_resource(TKS, "/create_tks_api/<int:id>")
+
+if __name__ == "__main__":
     app.run(debug=True, port=8888)
 
 # curl -v http://127.0.0.1:5555/create_tks_api/  -H "Content-Type: application/json" -X POST --data '{"ac":"Example AC", "moderators":["XXX", "XXXXX", "XXXXX"]}'

@@ -1,0 +1,60 @@
+{% extends  'index.html' %}
+{% block content %}
+<div class="container" style="zoom:100%">
+    <div class="row row-cols-xl-3 row-cols-md-3 justify-content-center">
+        {% for i in ip %}
+        {% if ip[i] %}
+        <div class="col mb-4 shadow-lg p-3 mb-5 bg-white rounded">
+            <div id=cardSbc class="card" style="width: 20rem">
+                <a href="/create_tks"><img src="/static/media/audiocodes-logo_v2.png" href="/create_tks"
+                                           class="card-img-top" alt="..."></a>
+                <div class="card-body">
+                    <h5 class="card-title">SBC: </h5>
+                    <p class="card-text">IP: <a href="#">{{i}}</a></p>
+                    <p class="stream card-tex text-center">stream on AVAYA</p>
+                </div>
+                <div class="col text-center m-md-2">
+                    <a class="btn btn-primary" href="/cutter_update?ipaddress={{i}}&value=">cutter On</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col mb-4 shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="card border-danger" style="width: 21rem">
+                <a href="/create_tks"><img src="/static/media/audiocodes-logo_v2.png" href="/create_tks"
+                                           class="card-img-top" alt="..."></a>
+                <div class="card-body">
+                    <h5 class="card-title">SBC: </h5>
+                    <p class="card-text">IP: <a href="#">{{i}}</a></p>
+                    <p class="stream card-tex text-center text-danger">stream on IVR</p>
+                </div>
+                <div class="col text-center m-md-2">
+                    <a class="btn 'btn btn-danger" href="/cutter_update?ipaddress={{i}}&value=true">cutter Off</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+<div class="container">
+    <div class="row row-cols-xl-3 row-cols-md-3 justify-content-center">
+        <div class="col mb-4">
+        {% for i in range(6) %}
+
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/static/media/audiocodes-logo_v2.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
