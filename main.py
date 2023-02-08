@@ -109,16 +109,16 @@ ip_ = {
     "10.119.243.545": True,
     "10.119.243.123": True,
     "10.119.243.121": True,
-    "10.119.243.122": True,
-    "10.119.243.126": True,
-    "10.119.243.124": True,
-    "10.119.243.125": True,
+    # "10.119.243.122": True,
+    # "10.119.243.126": True,
+    # "10.119.243.124": True,
+    # "10.119.243.125": True,
 }
 
 
 @app.route("/cutter", methods=["GET"])
 def cutter():
-    return render_template("cutter.html", ip=ip_)
+    return render_template("cutter_.html", ip=ip_)
 
 
 @app.route("/cutter_update", methods=["GET"])
